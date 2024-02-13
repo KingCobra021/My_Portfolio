@@ -1,8 +1,8 @@
 """
-URL configuration for djangoProject project.
+URL configuration for My_Portfolio project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_screen_view, name = "home")
+path('', home_screen_view, name = "home"),
 ]
 
 if settings.DEBUG: # tells the application where to lok for static files when we are in debug mode
