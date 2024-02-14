@@ -33,6 +33,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #my application
     'Portfolio',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'account',
     #defualt dejango apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +51,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # my MFA middleware
+    'django_otp.middleware.OTPMiddleware',
+    ####
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -109,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Toronto'
 
 USE_I18N = True
 
@@ -132,3 +138,6 @@ MEDIA_ROOT = BASE_DIR / '/media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGOUT_REDIRECT_URL = '/'
