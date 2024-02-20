@@ -25,7 +25,7 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 from django.urls import path, include  # Make sure to include this import
 from account.models import Account
-
+from account.views import logout_view
 
 
 class OTPAdmin(OTPAdminSite):
@@ -37,9 +37,10 @@ admin_site.register(Account)
 admin_site.register(TOTPDevice, TOTPDeviceAdmin)
 
 urlpatterns = [
-    path('admin/', admin_site.urls),
+    path('admin/', admin.site.urls),
     path('', home_screen_view, name="home"),
     path('accounts/', include('django.contrib.auth.urls')),  # This includes the auth URLs
+    path('logout/', logout_view, name = "logout")
 
 ]
 

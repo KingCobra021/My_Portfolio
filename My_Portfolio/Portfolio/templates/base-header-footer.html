@@ -4,25 +4,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "Portfolio/css/style.css" %}">
     <title></title>
 </head>
+<header class="header">
+ <div class="center">
+        <div class="container">
+            <a href="{% url 'home' %}"><img src="{% static "Portfolio/media/logo.webp" %}" alt="logo" class="logo" id="header-logo"></a>
+            <nav class="menu">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <!-- <li><a href="/userlist">User Database</a></li> -->
+                    {% if user.is_authenticated %}
+                        <p>Welcome, {{ user.username }} | <a href = "{% url 'logout' %}">logout</a></p>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
 <body>
 
 {% block content %}
 
 {% endblock content %}
-
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}!</p>
-    <form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
-
-{% else %}
-    <a href="{% url 'login' %}">Login</a>
-{% endif %}
 
 
 </body>
