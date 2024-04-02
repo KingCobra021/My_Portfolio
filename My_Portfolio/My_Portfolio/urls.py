@@ -14,18 +14,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
-from Portfolio.views import home_screen_view
-from django.conf.urls.static import static
 from django.conf import settings
-from django.contrib.auth.models import User
-from django_otp.admin import OTPAdminSite
-from django_otp.plugins.otp_totp.models import TOTPDevice
-from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+from django.conf.urls.static import static
+from django.contrib import admin
 from django.urls import path, include  # Make sure to include this import
+from django_otp.admin import OTPAdminSite
+from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+from django_otp.plugins.otp_totp.models import TOTPDevice
+
+from Portfolio.views import home_screen_view
 from account.models import Account
-from account.views import logout_view
+from account.views import logout_view, login_view
 
 
 class OTPAdmin(OTPAdminSite):
@@ -40,7 +39,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view, name="home"),
     path('accounts/', include('django.contrib.auth.urls')),  # This includes the auth URLs
-    path('logout/', logout_view, name = "logout")
+    path('logout/', logout_view, name="logout"),
+    path('login/', login_view, name="login")
 
 ]
 
