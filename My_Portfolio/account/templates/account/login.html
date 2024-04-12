@@ -1,42 +1,39 @@
 {% extends 'base-header-footer.html' %}
 {% block content %}
-<form method="post" class="form">
-    {% csrf_token %}
+    <form method="post" class="form">
+        {% csrf_token %}
 
-    {% for field in login_form %}
+        {% for field in login_form %}
 
-            <p>
-                {{ field.label_name }}
-                {{ field }}
+                <p>
+                    {{ field.label_name }}
+                    {{ field }}
 
-                {% if field.help_text %}
-                    <small style ="color: grey;">{{ field.help_text }}</small>
-                {% endif %}
-            </p>
+                    {% if field.help_text %}
+                        <small style ="color: grey;">{{ field.help_text }}</small>
+                    {% endif %}
+                </p>
 
+        {% endfor %}
 
-    {% endfor %}
+        {% for field in login_form %}
+            {% for error in field.errors %}
+                <p style ="color: red;">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
 
-    {% for field in login_form %}
         {% for error in field.errors %}
             <p style ="color: red;">{{ error }}</p>
         {% endfor %}
-    {% endfor %}
-
-    {% for error in field.errors %}
-        <p style ="color: red;">{{ error }}</p>
-    {% endfor %}
-    {% if login_form.non_field_errors %}
-        <div style ="color: red;">
-            <p>{{ login_form.non_field_errors }}</p>
-        </div>
-    {% endif %}
+        {% if login_form.non_field_errors %}
+            <div class ="error" style ="color: red;">
+                <p >{{ login_form.non_field_errors }}</p>
+            </div>
+        {% endif %}
 
 
-    <button type="submit" id = "btn">log in</button>
-    <a href="/" id="home_btn">Home</a>
+        <button type="submit" id = "btn">log in</button>
+        <a href="/" id="home_btn">Home</a>
 
-</form>
-
-
+    </form>
 {% endblock content %}
