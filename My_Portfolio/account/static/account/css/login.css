@@ -1,80 +1,95 @@
 .form
 {
-    display: flex;
+    display: block;
     position: relative;
-    flex-direction: column;
     border-radius: 10px;
-    flex-wrap: wrap;
     box-sizing: border-box;
-    justify-content: space-evenly;
-    align-content: center;
-    border: 1px solid #000;
+    border: 2px solid #000;
     width: 600px;
     top: 50%;
-    transform: translateY(-70%);
+    transform: translateY(-70%) ;
     height: 600px;
     margin: 0 auto;
     backdrop-filter: blur(10px);
 }
-#id_email, #id_password
+.content
 {
+    display: flex;
     position: relative;
-    display: block;
-    top: 50%;
-    border-bottom: 3px solid red;
-    font-size: 20px;
-    transform: translateY(-50%);
-    width:300px;
-    background: none;
-    text-align: left;
-    padding: 10px;
+    box-sizing: border-box;
+    width: 480px;
+    height: 600px;
+    left: 50%;
+    transform: translateX(-50%);
     align-content: center;
-    margin: 0 auto;
-    outline: none;
-    color: #1f35ff;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+}
+ #id_email, #id_password
+{
+     position: relative;
+     display: block;
+     border-bottom: 3px solid red;
+     font-size: 20px;
+     padding-top: 10px;
+     padding-bottom: 10px;
+     width:80%;
+     background: none;
+     text-align: left;
+     align-content: center;
+     margin: 0 auto;
+     outline: none;
+     color: #2772da;
 
 
 }
 #id_email::placeholder, #id_password::placeholder
 {
-    color: #1f35ff;
+    color: #2772da;
     text-align: left;
 
 }
-#id_email:focus, #id_password:focus
+
+.content #btns #btn
 {
-    outline: none;
+    position: absolute;
+    display: block;
+    width:40%;
+    font-size: 20px;
+    padding-top: 10px;
+    outline: red;
+    padding-bottom: 10px;
+    border-radius: 3px;
+    right: 0;
+    border: 1px solid #ff5200;
+    align-content: center;
+    background: #00095d;
+    text-align: center;
+    color: #ff5200;
+}
+.content #btns #btn:hover
+{
+    border: 1px solid #00095d;
+    background: #ff5200;
+    color: #00095d;
 
 }
-
-#btn
-{
-    position: relative;
-    display: block;
-    width:310px;
-    font-size: 15px;
-    border-radius: 3px;
-    border: 2px solid #000;
-    padding: 16px;
-    align-content: center;
-    background: #FCFCFC;
-    text-align: center;
-    margin: 0 auto;
-}
-#home_btn
+.content #btns #home_btn
 {
 
-    position: relative;
+    position: absolute;
     display: block;
     background: #FCFCFC;
     border-radius: 3px;
-    width:300px;
+    width:40%;
     border: 2px solid #000;
-    padding: 13px;
     font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    left: 0;
     text-align: center;
     align-content: center;
-    margin: 0 auto;
 
 }
 .error
@@ -96,3 +111,24 @@ html body .form input:focus
     box-shadow: none !important;
     border: none ;
 }
+p .fields
+{
+    width: 100%;
+    padding-bottom: 5px;
+    padding-top:5px;
+    margin: 0 auto;
+    align-content: center;
+}
+.content #btns
+{
+    display: inline-block;
+    width: 80%;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+}
+html body .form button {
+    border: none;
+    cursor: pointer;
+}
+
