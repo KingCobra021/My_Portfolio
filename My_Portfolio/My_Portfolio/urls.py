@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
+'''from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include  # Make sure to include this import
@@ -45,5 +45,25 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:  # tells the application where to lok for static files when we are in debug mode
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)'''
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from Portfolio.views import home_screen_view
+from account.views import logout_view, login_view, otp_verify_view
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home_screen_view, name="home"),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', logout_view, name="logout"),
+    path('login/', login_view, name="login"),
+    path('otp-verify/', otp_verify_view, name="otp_verify"),
+]
+
+if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

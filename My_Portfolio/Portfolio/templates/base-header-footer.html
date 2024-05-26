@@ -37,7 +37,11 @@
 {% block content %}
 
 {% endblock content %}
-
+{% block extra_js %}
+    <!-- For Extra JavaScript files -->
+    <script src="{% static 'account/Scripts/login_fields.js'%}"></script>
+    <script src="{% static 'account/Scripts/login.js'%}"></script>
+{% endblock extra_js %}
 
 </body>
 </html>
