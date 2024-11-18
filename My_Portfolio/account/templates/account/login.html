@@ -1,61 +1,36 @@
 {% extends 'base-header-footer.html' %}
 {% block content %}
     <form method="post" class="form">
-        <div class = "content">
+        <div class="content">
             {% csrf_token %}
-
             {% for field in login_form %}
-
-                    <p class = "fields">
-                        {{ field.label_name }}
-                        {{ field }}
-
-                        {% if field.help_text %}
-                            <small>{{ field.help_text }}</small>
-                        {% endif %}
-                    </p>
-
+                <p class="fields">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <small class="error" style="color: red;">{{ error }}</small>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                </p>
             {% endfor %}
-
-            {% for field in login_form %}
-                {% for error in field.errors %}
-                    <div class ="error">
-                        <p id = "valid_email" style ="color: red;">{{ error }}</p>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-
-            {% for error in field.errors %}
-                <div class ="error">
-                    <p style ="color: red;">{{ error }}</p>
-                </div>
-            {% endfor %}
-
             {% if login_form.non_field_errors %}
-                <div class ="error" style ="color: red;">
-                    <p >{{ login_form.non_field_errors }}</p>
+                <div class="error" style="color: red;">
+                    {% for error in login_form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
                 </div>
             {% endif %}
 
             <div id="btns">
-                <button type="submit" id = "btn">login</button>
+                <button type="submit" id="btn">Login</button>
                 <a href="/" id="home_btn">Home</a>
             </div>
-
         </div>
     </form>
-
-    <form method="post" class="form" id="otpForm" style="display:none;">
-        <div class="content">
-            {% csrf_token %}
-            <p class="fields">
-                <label for="otp">OTP</label>
-                <input type="text" id="otp" name="otp" placeholder="Enter your OTP">
-            </p>
-            <div id="btns">
-                <button type="button" id="otpBtn">Verify OTP</button>
-            </div>
-        </div>
-    </form>
-
 {% endblock content %}
+

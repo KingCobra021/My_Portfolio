@@ -17,36 +17,29 @@ Including another URLconf
 '''from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include  # Make sure to include this import
-from django_otp.admin import OTPAdminSite
-from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
-from django_otp.plugins.otp_totp.models import TOTPDevice
-
+from django.urls import path, include
 from Portfolio.views import home_screen_view
-from account.models import Account
-from account.views import logout_view, login_view
+from account.views import logout_view, login_view, otp_verify_view
+from django.shortcuts import redirect
 
-
-class OTPAdmin(OTPAdminSite):
-    pass
-
-
-admin_site = OTPAdmin(name='OTPAdmin')
-admin_site.register(Account)
-admin_site.register(TOTPDevice, TOTPDeviceAdmin)
-
+def admin_redirect_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    return redirect('/admin/')
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('redirect-admin/', admin_redirect_view, name='redirect_admin'),
     path('', home_screen_view, name="home"),
-    path('accounts/', include('django.contrib.auth.urls')),  # This includes the auth URLs
+    path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', logout_view, name="logout"),
-    path('login/', login_view, name="login")
-
+    path('login/', login_view, name="login"),
+    path('otp-verify/', otp_verify_view, name="otp_verify"),
 ]
 
-if settings.DEBUG:  # tells the application where to lok for static files when we are in debug mode
+if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)'''
+
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -54,14 +47,22 @@ from django.contrib import admin
 from django.urls import path, include
 from Portfolio.views import home_screen_view
 from account.views import logout_view, login_view, otp_verify_view
+from django.shortcuts import redirect
+
+# Redirect to /admin for authenticated users
+def admin_redirect_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to login page
+    return redirect('/admin/')  # Allow access to admin panel if authenticated
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home_screen_view, name="home"),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('logout/', logout_view, name="logout"),
-    path('login/', login_view, name="login"),
-    path('otp-verify/', otp_verify_view, name="otp_verify"),
+    path('admin/', admin.site.urls),  # Django admin panel
+    path('redirect-admin/', admin_redirect_view, name='redirect_admin'),  # Custom redirect for admin access
+    path('', home_screen_view, name="home"),  # Homepage
+    path('accounts/', include('django.contrib.auth.urls')),  # Auth-related URLs
+    path('logout/', logout_view, name="logout"),  # Logout view
+    path('login/', login_view, name="login"),  # Login view
+    path('otp-verify/', otp_verify_view, name="otp_verify"),  # OTP verification view
 ]
 
 if settings.DEBUG:

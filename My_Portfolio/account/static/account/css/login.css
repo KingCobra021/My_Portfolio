@@ -26,7 +26,7 @@
     flex-direction: column;
 
 }
- #id_email, #id_password
+ #id_email, #id_password, #id_otp
 {
      position: relative;
      display: block;
@@ -44,7 +44,7 @@
     transition: color 0.3s ease;
 
 }
-#id_email::placeholder, #id_password::placeholder
+#id_email::placeholder, #id_password::placeholder, #id_otp::placeholder
 {
     color: #2772da;
     text-align: left;
@@ -141,13 +141,15 @@ html body .form button
     cursor: pointer;
 }
 #id_email.focus-animation,
-#id_password.focus-animation
+#id_password.focus-animation,
+#id_otp.focus-animation
 {
     animation: focus-animation 0.5s forwards;
 }
 
 #id_email.blur-animation,
-#id_password.blur-animation
+#id_password.blur-animation,
+#id_otp.blur-animation
 {
     animation: blur-animation 0.5s forwards;
 }
@@ -197,4 +199,35 @@ html body .form button
     top: 5%;
     width: 100%;
     left: 5%;
+}
+
+.fields label
+{
+    display: none;
+}
+#OTPBTN
+{
+    position: absolute;
+    display: block;
+    width:30%;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 3px;
+    right: 10%;
+    border: 1px solid #ff5200;
+    align-content: center;
+    background: #00095d;
+    text-align: center;
+    color: #ff5200;
+}
+#OTPBTN:hover
+{
+    border: 1px solid #00095d;
+    background: #ff5200;
+    color: #00095d;
+}
+.otpfileds label
+{
+    display: none;
 }
